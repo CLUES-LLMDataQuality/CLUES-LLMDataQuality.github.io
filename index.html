@@ -250,20 +250,7 @@
           <div id="results-carousel" class="carousel results-carousel">
             <div class="box m-5">
               <div class="content has-text-centered">
-                <img src="static/images/stage1.pdf" alt="geometric reasoning" width="84%" />
-              </div>
-            </div>
-            <div class="box m-5">
-              <div class="content has-text-centered">
-                <img src="static/images/tease_scores_gpt4v.png" alt="geometric reasoning" width="84%" />
-                <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human
-                  performance our proposed
-                  <img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
-                  <span class="mathvista">MathVista</span>
-                  across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting,
-                  and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated
-                  via the playground chatbot.
-                </p>
+                <img src="static/images/workflow.png" alt="CLUES workflow" width="84%" />
               </div>
             </div>
           </div>
@@ -277,7 +264,7 @@
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Introduction</h2>
+          <h2 class="title is-3">Summary</h2>
           <div class="content has-text-justified">
             <p>
               Large language models (LLMs) training has predominantly relied on the accumulation of vast datasets.
@@ -285,13 +272,13 @@
               enhance the instruction following capacity of LLMs. Previously, data quality control relied heavily on
               manual selection processes. This approach, while being commonly used, rendered scalability
               challenges due to the substantial labor costs. Recent advancements have seen automated low-quality data
-              filters [3], such as perplexity filters and de-duplication filters [23]. However, their effectiveness
+              filters, such as perplexity filters and de-duplication filters. However, their effectiveness
               in data quality control in more complex environments remains to be explored, where data are spread across
               silos and locations in different formats and difficult to find.
             </p>
             <p>
-              Collaborative training techniques, such as model merging [12] and federated learning [21], are common
-              paradigms for addressing data-sharing constraints and GDPR [29] compliance. However, data quality control
+              Collaborative training techniques, such as model merging and federated learning, are common
+              paradigms for addressing data-sharing constraints and GDPR compliance. However, data quality control
               for private data is even more challenging if users are in charge of manually filtering data. We summarize
               here the two unique challenges: (1) Quality Heterogeneity Some clients may possess a higher proportion of
               low-quality data compared to others, thus we should not select data from all clients with a fixed
