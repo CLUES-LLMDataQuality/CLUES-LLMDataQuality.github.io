@@ -140,7 +140,7 @@ body {
 }
 
 a[href="https://www.cam.ac.uk/"] .org-banner {
-  height: 15em;
+  height: 100em;
 }
 
 @media screen and (max-width: 768px) {
