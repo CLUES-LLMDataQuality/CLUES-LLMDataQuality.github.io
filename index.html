@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Collaborative Private-domain High-quality Data Selection for LLMs via Training Dynamics">
+  <meta name="keywords" content="Data Quality, Collaborative Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> CLUES🔍: Collaborative Private-domain High-quality Data Selection for LLMs via Training Dynamics</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <!-- <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+/Users/panlu/Library/Mobile Documents/com~apple~CloudDocs/ImageMath/visual-mathqa-server/data_final/images
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link rel="icon" href="./static/images/mathvista.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>
+  <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <!-- <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a> -->
+        <!-- @PAN TODO: consider adding links? -->
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://chameleon-llm.github.io/">
+            <b>Chameleon</b>
+            <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+          <a class="navbar-item" href="https://scienceqa.github.io/">
+            <b>ScienceQA</b>
+            <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+          <a class="navbar-item" href="https://github.com/OpenGVLab/LLaMA-Adapter">
+            <b>LLaMA-Adapter (V2)</b>
+            <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+          <a class="navbar-item" href="https://promptpg.github.io/">
+            PromptPG
+          </a>
+          <a class="navbar-item" href="https://arxiv.org/abs/2307.10635">
+            SciBench
+          </a>
+          <a class="navbar-item" href="https://arxiv.org/abs/2305.12524">
+            TheoremQA
+          </a>
+          <a class="navbar-item" href="https://lila.apps.allenai.org/">
+            Lila
+          </a>
+          <a class="navbar-item" href="https://iconqa.github.io/">
+            IconQA
+          </a>
+          <a class="navbar-item" href="https://lupantech.github.io/inter-gps/">
+            Inter-GPS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <img src="static/images/mathvista.png" style="width:1em;vertical-align: middle" alt="Logo" />
+              <span class="mathvista" style="vertical-align: middle">MathVista</span>
+            </h1>
+            <h2 class="subtitle is-3 publication-subtitle">
+              Evaluating Math Reasoning in Visual Contexts
+              <!-- <br> -->
+              <!-- with GPT-4V, Bard, and Other Large Multimodal Models -->
+            </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://ryan0v0.github.io/">Wanru ZHao</a><sup style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">
+                <a href="https://os-hxfan.github.io/">Hongxiang Fan</a><sup style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">
+                <a href="https://hushell.github.io/">Shell Xu Hu</a><sup style="color:#6fbf73;">3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://michaelzhouwang.github.io/">Wangchunshu Zhou</a><sup style="color:#ed4b82">5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://cbfcbf.github.io/">Bofan Chen</a><sup style="color:#ffac33">1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="http://niclane.org/">Nicholas Lane</a><sup style="color:#ffac33">4</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup style="color:#6fbf73;">1</sup>University of Cambridge</span><br>
+              <span class="author-block"><sup style="color:#ed4b82">2</sup>Imperial College London</span>
+              <span class="author-block"><sup style="color:#ffac33">3</sup>Samsung AI Center Cambridge</span><br>
+              <span class="author-block"><sup style="color:#ffac33">4</sup>Flower Labs</span><br>
+              <span class="author-block"><sup style="color:#ffac33">5</sup>AIWaves</span><br>
+              <span class="paper-block"><b style="color:#f41c1c">NeurIPS 2024</b></span>
+            </div>
+
+            <!-- <section> -->
+            <!-- <div class="section" id="org-banners" style="display:fle">
+              <a href="https://www.ucla.edu/" target="_blank" rel="external">
+                  <img class="center-block org-banner" src="static/images/ucla.png" style="height:3em">
+              </a>
+              <a href="https://www.washington.edu/" target="blank" class="ext-link">
+                  <img class="center-block org-banner" src="static/images/uw.png" style="height:3em">
+              </a>
+              <a href="https://www.microsoft.com/en-us/research/" target="_blank" rel="external">
+                  <img class="center-block org-banner" src="static/images/microsoft.png" style="height:3em">
+              </a>
+            </div> -->
+            <!-- </section> -->
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <!-- @PAN TODO: change links -->
+                  <a href="https://openreview.net/pdf?id=OU1uqd1vyw"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/" class="external-link button is-normal is-rounded is-dark">
+                    <!-- <a href="https://lupantech.github.io/papers/arxiv23_mathvista.pdf"
+                   class="external-link button is-normal is-rounded is-dark"> -->
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/Ryan0v0/CLUES" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Twitter Link. -->
+                <span class="link-block">
+                  <a href="https://x.com/Renee42581826" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <!-- 💻🔗 -->
+                      <p style="font-size:18px">🌐</p>
+                    </span>
+                    <span>Twitter</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <img src="static/images/tease_scores_gpt4v.png" alt="geometric reasoning" width="99%"/>
+      <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human performance our proposed 
+      <img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo"/>
+      <span class="mathvista">MathVista</span>
+      across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting, and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated via the playground chatbot.
+      </p>
+    </div>
+  </div>
+</section> -->
+
+
+  <section class="section">
+    <div class="container" style="margin-top: -150px; margin-bottom: -100px;">
+      <div class="columns is-centered m-6">
+        <div class="column is-full has-text-centered content">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/tease_scores_version4_gemini.png" alt="geometric reasoning" width="84%" />
+                <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human
+                  performance our proposed
+                  <img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+                  <span class="mathvista">MathVista</span>
+                  across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting,
+                  and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated
+                  via the playground chatbot. <b class="best-score-text" style="color: #C6011F"> The scores of Gemini
+                    Ultra are from the Gemini Team, Google.</b>
+                </p>
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/tease_scores_gpt4v.png" alt="geometric reasoning" width="84%" />
+                <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human
+                  performance our proposed
+                  <img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+                  <span class="mathvista">MathVista</span>
+                  across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting,
+                  and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated
+                  via the playground chatbot.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container" style="margin-bottom: 2vh;">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Introduction</h2>
+          <div class="content has-text-justified">
+            <p>
+              Large language models (LLMs) training has predominantly relied on the accumulation of vast datasets.
+              Recent observations suggest that even a modest quantity of high-quality diverse data can significantly
+              enhance the instruction following capacity of LLMs. Previously, data quality control relied heavily on
+              manual selection processes. This approach, while being commonly used, rendered scalability
+              challenges due to the substantial labor costs. Recent advancements have seen automated low-quality data
+              filters [3], such as perplexity filters and de-duplication filters [23]. However, their effectiveness
+              in data quality control in more complex environments remains to be explored, where data are spread across
+              silos and locations in different formats and difficult to find.
+            </p>
+            <p>
+              Collaborative training techniques, such as model merging [12] and federated learning [21], are common
+              paradigms for addressing data-sharing constraints and GDPR [29] compliance. However, data quality control
+              for private data is even more challenging if users are in charge of manually filtering data. We summarize
+              here the two unique challenges: (1) Quality Heterogeneity Some clients may possess a higher proportion of
+              low-quality data compared to others, thus we should not select data from all clients with a fixed
+              selection ratio. (2) Domain Heterogeneity Different data silos may come from different vertical domains,
+              for example, in the multilingual setting, different languages have different quality standards that are
+              never unified.
+            </p>
+            <p>
+              In this paper, we propose CLUES (collaborative learning under exemplar scoring), an automated high-quality
+              data selection method for collaborative fine-tuning of Large Language Models (LLMs), showcasing notable
+              performance improvements in mixed-quality data environments from different private domain data. In these
+              domains, private LLM vendors are supposed to build their specialized applications based on open-source
+              LLMs using their own private data, which represent specialized domains with significant private (e.g.,
+              patient records) and public data (e.g., scientific papers). By tracing the training dynamics of each
+              training sample, we leverage public dataset to define an anchor dataset and compute the influence of each
+              training sample on the anchor dataset, and set a global threshold to provide effective collaborative
+              quality controls compared with traditional local data quality selection methods in the following aspects:
+              (1) <span style="color: #356ac3;">General</span>: Our method is a general pipeline to improve the
+              generalization performance for LLM fine-tuning. It has an interpretation in terms of bi-level optimization
+              with inner optimization in the client side and outer optimization in the server side to minimize the loss
+              on the anchor dataset. (2)
+              <span style="color: #ffa701;">Collaborative</span>: Our method is a collaborative fine-tuning paradigm
+              that
+              can be seamlessly integrated into existing model merging and federated learning frameworks, where the
+              modification occurs on the server side only to incorporate data selection. (3) <span
+                style="color: #1a9255;">Scalable</span>: We only employ an
+              approximation to solve the bi-level
+              optimization, which makes it scalable to LLMs.
+            </p>
+            <p>
+              We evaluate our proposed method on medical, multilingual and financial Question Answering (QA) datasets,
+              demonstrating significant improvements of up to 67.3% on challenging medical and financial QA datasets,
+              highlighting the effectiveness of our proposed method. Through extensive analyses, we demonstrate the
+              significant impact of leveraging training dynamics on the collaborative data quality control of LLMs.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <!-- bibtex -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <pre><code>@inproceedings{
+  zhao2024clues,
+  title={{CLUES}: Collaborative Private-domain High-quality Data Selection for {LLM}s via Training Dynamics},
+  author={Wanru Zhao and Hongxiang Fan and Shell Xu Hu and Wangchunshu Zhou and Nicholas Donald Lane},
+  booktitle={The Thirty-eighth Annual Conference on Neural Information Processing Systems},
+  year={2024},
+  }
+
+</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="section" id="org-banners" style="display:flex">
+      <a href="https://www.ucla.edu/" target="_blank" rel="external">
+        <img class="center-block org-banner" src="static/images/university-of-cambridge.png">
+      </a>
+      <a href="https://www.imperial.ac.uk/" target="blank" class="ext-link">
+        <img class="center-block org-banner" src="static/images/icl-logo.png">
+      </a>
+      <a href="https://research.samsung.com/aicenter_cambridge" target="_blank" rel="external">
+        <img class="center-block org-banner" src="static/images/Samsung.png">
+      </a>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a
+              href="https://mathvista.github.io/">MathVista</a> , licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </footer>
+
+</body>
+
+</html>
